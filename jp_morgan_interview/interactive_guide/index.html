@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JPMC Experienced Software Engineer Guide</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Background Animated Shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+    <div class="bg-shape bg-shape-3"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Interview Prep</h2>
+                <p>JPMorgan Chase & Co.</p>
+            </div>
+            <nav class="nav-links">
+                <a href="#dsa" class="active">Data Structures & Algo</a>
+                <a href="#sysdesign">System Design</a>
+                <a href="#java">Java & Spring Boot</a>
+                <a href="#microservices">Microservices & APIs</a>
+                <a href="#databases">Databases & Search</a>
+                <a href="#kafka">Kafka & Streaming</a>
+                <a href="#devops">DevOps & Cloud</a>
+                <a href="#security">Security & Networking</a>
+                <a href="#python">Python Capabilities</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="print-area">
+            <header class="top-nav" id="topNav">
+                <h1>Ultimate Software Engineering Interview Guide</h1>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="exportPDF()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Export PDF
+                    </button>
+                    <button class="btn btn-outline" onclick="expandAll()">Expand All</button>
+                    <button class="btn btn-outline" onclick="collapseAll()">Collapse All</button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+
+                <!-- SECTION: DSA -->
+                <section id="dsa" class="topic-section">
+                    <h2 class="section-title">Data Structures & Algorithms</h2>
+                    <p class="section-desc">Critical core concepts heavily tested in initial rounds.</p>
+                    
+                    <div class="difficulty-group easy">
+                        <h3>🟢 Easy</h3>
+                        <!-- Q1 -->
+                        <div class="question-card">
+                            <h4 class="q-title">1. Two Sum</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
+                                <pre><code class="language-java">public int[] twoSum(int[] nums, int target) {
+    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+    for (int i = 0; i &lt; nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] { map.get(complement), i };
+        }
+        map.put(nums[i], i);
+    }
+    throw new IllegalArgumentException("No match found");
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q2 -->
+                        <div class="question-card">
+                            <h4 class="q-title">2. Contains Duplicate</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given an integer array <code>nums</code>, return true if any value appears at least twice.</p>
+                                <pre><code class="language-java">public boolean containsDuplicate(int[] nums) {
+    Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+    for(int i : nums){
+        if(!set.add(i)) return true;
+    }
+    return false;
+}</code></pre>
+                            </div>
+                        </div>
+                         <!-- Q3 -->
+                        <div class="question-card">
+                            <h4 class="q-title">3. Best Time to Buy and Sell Stock</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> You are given an array prices where prices[i] is the price of a given stock on the ith day. Maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.</p>
+                                <pre><code class="language-java">public int maxProfit(int[] prices) {
+    int minPrice = Integer.MAX_VALUE;
+    int maxProfit = 0;
+    for (int p : prices) {
+        if (p &lt; minPrice) minPrice = p;
+        else if (p - minPrice &gt; maxProfit) maxProfit = p - minPrice;
+    }
+    return maxProfit;
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q4 -->
+                        <div class="question-card">
+                            <h4 class="q-title">4. Valid Anagram</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given two strings s and t, return true if t is an anagram of s, and false otherwise.</p>
+                                <pre><code class="language-java">public boolean isAnagram(String s, String t) {
+    if (s.length() != t.length()) return false;
+    int[] store = new int[26];
+    for (int i = 0; i &lt; s.length(); i++) {
+        store[s.charAt(i) - 'a']++;
+        store[t.charAt(i) - 'a']--;
+    }
+    for (int n : store) if (n != 0) return false;
+    return true;
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q5 -->
+                        <div class="question-card">
+                            <h4 class="q-title">5. Merge Two Sorted Lists</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Merge two sorted linked lists and return it as a sorted list.</p>
+                                <pre><code class="language-java">public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+    ListNode dummy = new ListNode(-1);
+    ListNode tail = dummy;
+    while(list1 != null && list2 != null) {
+        if(list1.val &lt; list2.val) { tail.next = list1; list1 = list1.next; }
+        else { tail.next = list2; list2 = list2.next; }
+        tail = tail.next;
+    }
+    tail.next = (list1 != null) ? list1 : list2;
+    return dummy.next;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Medium</h3>
+                        <!-- Q1 -->
+                        <div class="question-card">
+                            <h4 class="q-title">1. LRU Cache (High Frequency)</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.</p>
+                                <p><strong>Solution:</strong> Use a HashMap paired with a Doubly Linked List.</p>
+                                <pre><code class="language-java">class LRUCache {
+    class Node { int key, val; Node prev, next; Node(int k, int v) { key = k; val = v; } }
+    Node head = new Node(-1, -1), tail = new Node(-1, -1);
+    Map&lt;Integer, Node&gt; map = new HashMap&lt;&gt;();
+    int capacity;
+    
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head.next = tail; tail.prev = head;
+    }
+    private void add(Node node) {
+        Node next = head.next; head.next = node; node.prev = head; node.next = next; next.prev = node;
+    }
+    private void remove(Node node) {
+        Node prev = node.prev, next = node.next; prev.next = next; next.prev = prev;
+    }
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1;
+        Node node = map.get(key);
+        remove(node); add(node);
+        return node.val;
+    }
+    public void put(int key, int value) {
+        if (map.containsKey(key)) remove(map.get(key));
+        Node node = new Node(key, value);
+        map.put(key, node); add(node);
+        if (map.size() &gt; capacity) {
+            Node lru = tail.prev; remove(lru); map.remove(lru.key);
+        }
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q2 -->
+                        <div class="question-card">
+                            <h4 class="q-title">2. Number of Islands</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given an <code>m x n</code> 2D binary grid <code>grid</code> which represents a map of '1's (land) and '0's (water), return the number of islands. Use DFS or BFS to traverse adjacent lands.</p>
+                                <pre><code class="language-java">public int numIslands(char[][] grid) {
+    if (grid == null || grid.length == 0) return 0;
+    int count = 0;
+    for (int i=0; i&lt;grid.length; i++) {
+        for (int j=0; j&lt;grid[0].length; j++) {
+            if (grid[i][j] == '1') {
+                count++; dfs(grid, i, j);
+            }
+        }
+    }
+    return count;
+}
+private void dfs(char[][] grid, int r, int c) {
+    if (r&lt;0 || r&gt;=grid.length || c&lt;0 || c&gt;=grid[0].length || grid[r][c] == '0') return;
+    grid[r][c] = '0';
+    dfs(grid, r+1, c); dfs(grid, r-1, c); dfs(grid, r, c+1); dfs(grid, r, c-1);
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q3 -->
+                        <div class="question-card">
+                            <h4 class="q-title">3. Coin Change</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> You are given an integer array <code>coins</code> representing coins of different denominations and an integer <code>amount</code>. Return the fewest number of coins that you need to make up that amount.</p>
+                                <pre><code class="language-java">public int coinChange(int[] coins, int amount) {
+    int max = amount + 1;
+    int[] dp = new int[amount + 1];
+    Arrays.fill(dp, max);
+    dp[0] = 0;
+    for(int i=1; i&lt;=amount; i++) {
+        for(int coin : coins) {
+            if(coin &lt;= i) {
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+    }
+    return dp[amount] &gt; amount ? -1 : dp[amount];
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q4 -->
+                        <div class="question-card">
+                            <h4 class="q-title">4. Kth Largest Element in an Array</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given an integer array <code>nums</code> and an integer <code>k</code>, return the `k`th largest element in the array.</p>
+                                <pre><code class="language-java">public int findKthLargest(int[] nums, int k) {
+    PriorityQueue&lt;Integer&gt; minHeap = new PriorityQueue&lt;&gt;();
+    for (int num : nums) {
+        minHeap.add(num);
+        if (minHeap.size() &gt; k) minHeap.poll();
+    }
+    return minHeap.peek();
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Hard</h3>
+                        <!-- Q1 -->
+                        <div class="question-card">
+                            <h4 class="q-title">1. Trapping Rain Water</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+                                <pre><code class="language-java">public int trap(int[] height) {
+    if (height == null || height.length == 0) return 0;
+    int left = 0, right = height.length - 1;
+    int maxLeft = 0, maxRight = 0, res = 0;
+    while(left &lt; right) {
+        if(height[left] &lt;= height[right]) {
+            if(height[left] &gt;= maxLeft) maxLeft = height[left];
+            else res += maxLeft - height[left];
+            left++;
+        } else {
+            if(height[right] &gt;= maxRight) maxRight = height[right];
+            else res += maxRight - height[right];
+            right--;
+        }
+    }
+    return res;
+}</code></pre>
+                            </div>
+                        </div>
+                         <!-- Q2 -->
+                        <div class="question-card">
+                            <h4 class="q-title">2. Merge k Sorted Lists</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> You are given an array of <code>k</code> linked-lists, each list is sorted in ascending order. Merge all the linked-lists into one sorted list.</p>
+                                <pre><code class="language-java">public ListNode mergeKLists(ListNode[] lists) {
+    PriorityQueue&lt;ListNode&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; a.val - b.val);
+    for (ListNode node : lists) {
+        if (node != null) pq.add(node);
+    }
+    ListNode dummy = new ListNode(0);
+    ListNode tail = dummy;
+    while (!pq.isEmpty()) {
+        tail.next = pq.poll();
+        tail = tail.next;
+        if (tail.next != null) pq.add(tail.next);
+    }
+    return dummy.next;
+}</code></pre>
+                            </div>
+                        </div>
+                        <!-- Q3 -->
+                        <div class="question-card">
+                            <h4 class="q-title">3. Median of Two Sorted Arrays</h4>
+                            <div class="q-content">
+                                <p><strong>Problem:</strong> Given two sorted arrays <code>nums1</code> and <code>nums2</code> of size <code>m</code> and <code>n</code> respectively, return the median of the two sorted arrays. The overall run time complexity should be <code>O(log (m+n))</code>.</p>
+                                <pre><code class="language-java">public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    if(nums1.length &gt; nums2.length) return findMedianSortedArrays(nums2, nums1);
+    int m = nums1.length;
+    int n = nums2.length;
+    int low = 0, high = m;
+    while(low &lt;= high) {
+        int partitionX = (low + high) / 2;
+        int partitionY = (m + n + 1) / 2 - partitionX;
+        int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : nums1[partitionX - 1];
+        int minRightX = (partitionX == m) ? Integer.MAX_VALUE : nums1[partitionX];
+        int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : nums2[partitionY - 1];
+        int minRightY = (partitionY == n) ? Integer.MAX_VALUE : nums2[partitionY];
+        
+        if (maxLeftX &lt;= minRightY && maxLeftY &lt;= minRightX) {
+            if ((m + n) % 2 == 0) return ((Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY)) / 2.0);
+            else return Math.max(maxLeftX, maxLeftY);
+        } else if (maxLeftX &gt; minRightY) high = partitionX - 1;
+        else low = partitionX + 1;
+    }
+    throw new IllegalArgumentException();
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: System Design -->
+                <section id="sysdesign" class="topic-section">
+                    <h2 class="section-title">System Design (HLD & LLD)</h2>
+                    <p class="section-desc">Expect questions spanning LLD (Design Patterns) to HLD (Scalability Architecture).</p>
+                    
+                    <div class="difficulty-group easy">
+                        <h3>🟢 Foundational</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. What is the difference between Load Balancers and API Gateways?</h4>
+                            <div class="q-content">
+                                <p><strong>Load Balancer:</strong> Operates primarily at OSI Layer 4 or 7. Distributes traffic across instances based on algorithms (Round Robin, Least Connections). Examples: AWS ALB, Nginx.</p>
+                                <p><strong>API Gateway:</strong> Sits deeper in the application logic. Handles routing, authentication/authorization, rate limiting, request/response transformation, and metrics logging. Examples: AWS API Gateway, Kong, Apigee.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Explain the Singleton and Factory Design Patterns (LLD).</h4>
+                            <div class="q-content">
+                                <p><strong>Singleton:</strong> Ensure only one instance of a class exists across the application. Used for Config managers or DB Connection pools. (Always mention Thread-Safe Double Checked Locking strategy).</p>
+                                <p><strong>Factory:</strong> Provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Medium / LLD Heavy</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Design a Rate Limiter</h4>
+                            <div class="q-content">
+                                <p><strong>Algorithms:</strong> Token Bucket, Leaky Bucket, Fixed Window Counter, Sliding Window Log, Sliding Window Counter.</p>
+                                <p><strong>Implementation Strategy:</strong> Use Redis (In-memory datastore). Use Lua scripts in Redis to make read-and-decrement actions atomic. Handle distributed rate limiting per user IP, or Customer ID.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Design a URL Shortener (Bitly)</h4>
+                            <div class="q-content">
+                                <p><strong>Core Challenge:</strong> Avoiding collision and scale (Millions of writes, billions of reads).</p>
+                                <p><strong>Strategy:</strong> Base62 Encoding. To prevent collision across distributed nodes, use Apache Zookeeper to give ticket-ranges to generation servers, or use a standalone ID Generator database.</p>
+                                <p><strong>Storage:</strong> Key-Value store (Cassandra, DynamoDB). Read-heavy so heavy caching via Redis is required.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">3. Low Level Design: Design a Parking Lot</h4>
+                            <div class="q-content">
+                                <p><strong>Key Classes:</strong> <code>ParkingLot</code>, <code>ParkingFloor</code>, <code>ParkingSpot</code> (Compact, Large, Handicapped), <code>Vehicle</code>, <code>Ticket</code>, <code>PaymentTerminal</code>.</p>
+                                <p><strong>Patterns to use:</strong> Strategy Pattern for dynamic pricing per hour. Factory to generate standard vs EV spots. State pattern (Occupied, Free, Reserved).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Advanced / HLD Architecture</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Design a Payment Gateway / Processing System</h4>
+                            <div class="q-content">
+                                <p><strong>Critical Focus:</strong> ACID Transactions, Idempotency, No single point of failure (SPOF).</p>
+                                <p><strong>Architecture:</strong></p>
+                                <ul>
+                                    <li>Requests hit the <strong>API Gateway</strong>.</li>
+                                    <li>Pass to a <strong>Payment Executor Service</strong>.</li>
+                                    <li>All states MUST be stored in an ACID compliant DB (PostgreSQL). State transitions: <code>INITIATED -&gt; PROCESSING -&gt; SUCCESS/FAILED</code>.</li>
+                                    <li>To ensure <strong>Idempotency</strong>, every transaction must have a unique UUID (Idempotency Key). If a retry with the same UUID hits the API, return the previous state rather than double parsing.</li>
+                                    <li>If a downstream Bank API fails or times out, use Kafka queues with Dead Letter Queues (DLQ) for asynchronous retry mechanisms.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Design a Distributed Message Queue (like Kafka)</h4>
+                            <div class="q-content">
+                                <p><strong>Components:</strong> Producers, Consumers, Brokers, Zookeeper (or KRaft for cluster metadata management).</p>
+                                <p><strong>Storage Strategy:</strong> Store messages in append-only immutable files (segments) per topic partition. To keep it fast, rely heavily on OS Page Cache rather than JVM Heap. Zero-copy operations to send data directly from disk buffer to network socket.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Java & Spring Boot -->
+                <section id="java" class="topic-section">
+                    <h2 class="section-title">Java & Spring Boot</h2>
+                    <p class="section-desc">Core JPMC tech stack. Deep understanding of JVM, concurrency, and Spring internals required.</p>
+                    
+                    <div class="difficulty-group easy">
+                        <h3>🟢 Easy</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Differences between Abstract Class and Interface in Java 8+?</h4>
+                            <div class="q-content">
+                                <p>Interfaces can now have <code>default</code> and <code>static</code> methods. However, Abstract classes can hold state (instance variables), while Interfaces cannot. A class can implement multiple interfaces but only extend one abstract class.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. What are the Spring Bean Scopes?</h4>
+                            <div class="q-content">
+                                <ul>
+                                    <li><code>Singleton</code> (default): One instance per Spring IoC container.</li>
+                                    <li><code>Prototype</code>: New instance every time it is requested.</li>
+                                    <li><code>Request</code>, <code>Session</code>, <code>GlobalSession</code> (Web-aware only).</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">3. How does Garbage Collection work?</h4>
+                            <div class="q-content">
+                                <p>Generational GC splits Heap into minor/young generation (Eden, Survivor spaces) and major/old generation. Minor GC cleans Eden fast. PermGen (Java 7) became Metaspace (Java 8). Popular GCs: G1GC (default in newer Javas), ZGC (Ultra low latency).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Medium</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. How does Spring Boot AutoConfiguration work?</h4>
+                            <div class="q-content">
+                                <p>Driven by the <code>@EnableAutoConfiguration</code> annotation (which is part of <code>@SpringBootApplication</code>). It looks at the classpath for specific jars and defaults. Validations rely heavily on <code>@ConditionalOnClass</code> or <code>@ConditionalOnMissingBean</code> to spin up beans automatically.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Explain Volatile vs Synchronized in Java concurrency.</h4>
+                            <div class="q-content">
+                                <p><code>volatile</code> ensures memory visibility (reads from main memory instead of CPU cache) but does NOT ensure atomicity (i++ is not safe). <code>synchronized</code> locks the object/block, ensuring only one thread executes it, providing both visibility and atomicity.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">3. Explain the internal working of Java 8 Streams.</h4>
+                            <div class="q-content">
+                                <p>Pipelines consist of a source, intermediate operations (lazy, e.g., map, filter) and a terminal operation (e.g., collect, forEach). Execution doesn't start until the terminal operation is invoked. Operates mostly in a pull-architecture via <code>Spliterator</code>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Hard</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. ThreadPoolExecutor Architecture & Tuning</h4>
+                            <div class="q-content">
+                                <p>If a thread pool has core pool size 5, max pool size 10, and queue capacity of 50. What happens at 6 concurrent tasks?</p>
+                                <p><strong>Answer:</strong> Request 1-5 consume core threads. Request 6 gets added to the <strong>queue</strong>. A new thread (up to maxPoolSize) is ONLY created if the queue becomes full (task 56).</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. How to prevent Memory Leaks in Java?</h4>
+                            <div class="q-content">
+                                <p>Even with GC, objects referenced by static Maps/Lists will never be collected. Fix: Use <code>WeakHashMap</code>. Don't leave database Connections, Streams, or Sockets open; always use Try-With-Resources. Close ThreadLocal variables.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">3. How does Spring AOP work under the hood?</h4>
+                            <div class="q-content">
+                                <p>Spring AOP uses JDK dynamic proxies (if an interface exists) or CGLIB proxies (if subclassing is required) to wrap target beans at runtime. When a method is invoked, it flows through the advice chain (Before, After, Around) before hitting the target bean.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Databases & Architecture -->
+                <section id="databases" class="topic-section">
+                    <h2 class="section-title">Databases: Redis, ES, MongoDB, SQL</h2>
+                    
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Intermediate & Concept based</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Differences between clustered index vs non-clustered index?</h4>
+                            <div class="q-content">
+                                <p>Clustered index defines the physical order of data in a table (Primary Key default). Only 1 per table. Non-clustered index creates a separate B-Tree holding pointers to the actual data location. You can have many non-clustered indexes.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. How does Elasticsearch score documents? (TF-IDF vs BM25)</h4>
+                            <div class="q-content">
+                                <p>Term Frequency (TF) asks how often a word appears in a doc. Inverse Document Frequency (IDF) asks how rare the word is across all docs. ES moved to BM25 in version 5.x, which adds saturation (preventing very long documents from dominating results simply because of repeated terms).</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">3. Redis Persistence strategies?</h4>
+                            <div class="q-content">
+                                <p><strong>RDB (Redis Database Backup):</strong> Snapshots at specified intervals. Faster, but risks data loss since the last snapshot.</p>
+                                <p><strong>AOF (Append Only File):</strong> Logs every write operation. More durable, but leads to large files affecting restart time.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Advanced Scaling DB</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Explain Database Sharding and Consistent Hashing</h4>
+                            <div class="q-content">
+                                <p><strong>Sharding:</strong> Splitting large tables horizontally across multiple DB servers. Challenge: Resharding when scaling up.</p>
+                                <p><strong>Consistent Hashing:</strong> Avoids moving a massive amount of records when adding/removing a server node. Instead of <code>id % total_servers</code>, map both servers and data keys onto a virtual hash ring (0-360 deg). Look clockwise to find the server node. Only <code>K/N</code> keys need moving on scale events.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Dealing with the "Thundering Herd" or Cache Stampede.</h4>
+                            <div class="q-content">
+                                <p>Occurs when an expensive-to-compute cache key expires, and 5000 concurrent requests suddenly bypass cache to hit the DB, crashing it.</p>
+                                <p><strong>Solution:</strong> Lock generation strategy. Let only 1 request hit the DB to rebuild cache; force the other 4999 to wait/block, or return a slightly stale value while building cache asynchronously.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: DevOps and Cloud -->
+                <section id="devops" class="topic-section">
+                    <h2 class="section-title">DevOps, Docker, Kubernetes & Cloud</h2>
+                    
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Medium</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Explain Docker Networking Modes.</h4>
+                            <div class="q-content">
+                                <ul>
+                                    <li><code>bridge</code>: default, creates a private network internal to the host.</li>
+                                    <li><code>host</code>: removes network isolation; uses the host's networking stack directly.</li>
+                                    <li><code>none</code>: completely disables networking stack.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Kubernetes High Availability and Self-Healing.</h4>
+                            <div class="q-content">
+                                <p>K8s utilizes a Master node consisting of an API Server, etcd, Scheduler, and Controller Manager. Worker nodes run Kubelets. Self-healing is achieved via ReplicaSets ensuring the desired state of Pods is strictly maintained. If a worker node dies, the Controller immediately schedules the pods on functioning nodes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Hard</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Kubernetes Liveness vs Readiness vs Startup Probes.</h4>
+                            <div class="q-content">
+                                <ul>
+                                    <li><strong>Readiness Probe:</strong> Determines if a Pod is ready to accept traffic. If it fails, traffic isn't routed to it, but it isn't killed. Used for apps initializing heavy caches on startup.</li>
+                                    <li><strong>Liveness Probe:</strong> Checks if a Pod is deadlocked. If it fails, Kubelet kills the pod and restarts it.</li>
+                                    <li><strong>Startup Probe:</strong> Disables Liveness/Readiness probes until the app has successfully started.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Blue-Green vs Canary Deployments in CI/CD.</h4>
+                            <div class="q-content">
+                                <p><strong>Blue-Green:</strong> Two identical environments. Traffic routes fully to Green while Blue is upgraded. If Blue is stable, switch router to hit Blue instantly. Fast rollback.</p>
+                                <p><strong>Canary:</strong> Route 5% of traffic to the new version. Monitor error rates. If successful, gradully increase to 10%, 50%, 100%. Highly safe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: Kafka & Security -->
+                <section id="kafka" class="topic-section">
+                    <h2 class="section-title">Kafka & Security (JPMC Focus)</h2>
+                    
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Kafka & Messaging Medium</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. RabbitMQ vs Kafka.</h4>
+                            <div class="q-content">
+                                <p><strong>RabbitMQ:</strong> Smart broker, dumb consumer model. Tracks message state. Messages deleted when picked up. Advanced routing.</p>
+                                <p><strong>Kafka:</strong> Dumb broker, smart consumer model. Highly scalable appended event log. Great for replayability, stream processing, high throughput log aggregation.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. JWT (JSON Web Tokens) vs Session Authentication.</h4>
+                            <div class="q-content">
+                                <p><strong>Session:</strong> Stateful. Server stores session ID in memory/DB. Hard to scale horizontally without sticky-sessions or Redis centralization.</p>
+                                <p><strong>JWT:</strong> Stateless. Server signs a payload. To verify, server only needs the secret key. Easy horizontal scaling.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="difficulty-group hard">
+                        <h3>🔴 Security & Networking Hard</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Implementing RBAC effectively in Microservices.</h4>
+                            <div class="q-content">
+                                <p>1. API Gateway validates raw JWT signature. 2. Extracts Roles (e.g., ADMIN). 3. Gateway injects headers downwards into internal services. 4. In Spring Boot, use <code>@PreAuthorize("hasRole('ADMIN')")</code> on controller methods.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. What is Post-Quantum Cryptography (PQC)?</h4>
+                            <div class="q-content">
+                                <p>Symmetric encryption (AES-256) is generally safe from Quantum computers. Asymmetric (RSA, ECC) relies on factoring prime numbers—a task Shor's algorithm running on a quantum computer could do cleanly. PQC refers to adopting mathematical problems (like lattice-based math) that are incredibly difficult for both classical and quantum computers to solve. Essential knowledge for modern banking infrastructure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="python" class="topic-section">
+                    <h2 class="section-title">Python Capabilities</h2>
+                    
+                    <div class="difficulty-group medium">
+                        <h3>🟡 Python Medium to Hard</h3>
+                        <div class="question-card">
+                            <h4 class="q-title">1. Explain GIL (Global Interpreter Lock) in Python.</h4>
+                            <div class="q-content">
+                                <p>The GIL ensures that only one native thread executes Python bytecodes at a time, making CPython thread-safe. However, it severely bottlenecks CPU-bound multithreaded applications. To truly bypass the GIL and achieve parallelism in Python for CPU-heavy tasks, you must use the <code>multiprocessing</code> module instead of <code>threading</code>.</p>
+                            </div>
+                        </div>
+                        <div class="question-card">
+                            <h4 class="q-title">2. Generators vs Iterators vs Decorators.</h4>
+                            <div class="q-content">
+                                <ul>
+                                    <li><strong>Iterator:</strong> Object implementing <code>__iter__()</code> and <code>__next__()</code>.</li>
+                                    <li><strong>Generator:</strong> A function using <code>yield</code> instead of `return`. It pauses state. Highly memory efficient for massive data streams.</li>
+                                    <li><strong>Decorator:</strong> Higher-order function that takes a function and extends its behavior without modifying it explicitly (Used identically to Spring AOP).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section> <!-- /content-wrapper -->
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>
